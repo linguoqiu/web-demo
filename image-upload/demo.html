@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="./lib/imgUpload.js"></script>
+</head>
+
+<body>
+    <input type="file" id="file" multiple onchange="preview()" style="font-size:39px;">
+    <input type="button" value="上传" onclick="getdataurl()" style="font-size:39px;">
+    <div id="container">
+
+    </div>
+
+    <script>
+        var imgUploadObj;
+        function preview() {
+            var config = {
+                tip: "请上传格式为png, gif或者jpg的图片",
+                fileId: "file",
+                containerId: "container",
+                imgStyle: "width:100%;height:auto;border-radius:5px;"
+            }
+            // 创建对象
+            imgUploadObj = new ImgUpload(config);
+            imgUploadObj.preview();
+        
+        }
+
+        function getdataurl() {
+            // 获取dataurl
+            var dataurl = imgUploadObj.getDataUrl();
+            console.log(dataurl)
+        }
+    </script>
+</body>
+
+</html>

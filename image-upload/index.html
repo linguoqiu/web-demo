@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#" method="POST">
+        <legend>
+            图片上传
+        </legend>
+        <fieldset>
+            <input type="file" name="pic1" id="pic1" onchange="preview(this)" multiple="multiple" accept="image/x-png, image/jpg, image/jpeg, image/gif">
+            <br>
+            <br>
+        </fieldset>
+        <input type="button" value="上传">
+    </form>
+    <div id="container">
+
+
+    </div>
+    <script>
+        var msg = "您可以上传png, jpg, 或者gif格式的图片";
+        var filter = {
+            "jpeg": "/9j/4",
+            "gif": "R0lGOD",
+            "png": "iVBORw"
+        };
+
+        function preview(file) {
+            var container = document.getElementById("container");
+            container.innerHTML = "";
+            // 检测是否支持FileReader
+            if (window.FileReader) {
+                for (var index = 0, f; f = file.files[index]; index++) {
+                    console.log(f = file.files[index])
+                    var filereader = new FileReader();
+
+                    filereader.onload = function (event) {
+                        var srcpath = event.target.result;
+                        if (!validateImg(srcpath)) {
+                            console.log("H5" + msg);
+                        } else {
+                            showPreviewImage(srcpath);
+                        }
+                    };
+                    filereader.readAsDataURL(f);
+                }
+            } else {
+                if (!/\.jpg$|\.png$|\.gif$/i.test(file.value)) {
+                    console.log("原生" + msg);
+                } else {
+                    showPreviewImage(file.value);
+                }
+            }
+        }
+
+        function validateImg(data) {
+            // console.log(data);
+            var pos = data.indexOf(",") + 1;
+            for (var e in filter) {
+                if (data.indexOf(filter[e]) === pos) {
+                    return e;
+                }
+            }
+            return null;
+        }
+
+        function showPreviewImage(src) {
+            // console.log(src);
+
+            var img = document.createElement('img');
+            img.src = src;
+            img.style = "width:100%;height:auto;"
+            container.appendChild(img);
+        }
+    </script>
+</body>
+
+</html>
