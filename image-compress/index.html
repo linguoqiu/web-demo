@@ -116,9 +116,9 @@
         function downImg() {
             var sampleImage = document.getElementById("imgView"),
                 canvas = convertImageToCanvas(sampleImage);
-            url = canvas.toDataURL("image/png"); //PNG格式
+            url = canvas.toDataURL("image/jpeg"); //jpeg格式
             //以下代码为下载此图片功能
-            var triggerDownload = $("#tttt").attr("href", url).attr("download", "order-1111111111.png");
+            var triggerDownload = $("#tttt").attr("href", url).attr("download", "pirture.png");
             triggerDownload[0].click();
             //    triggerDownload.remove();
         }
