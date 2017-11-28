@@ -79,15 +79,16 @@
             //压缩后的图片base64 url
             /*canvas.toDataURL(mimeType, qualityArgument),mimeType 默认值是'image/jpeg';
              * qualityArgument表示导出的图片质量，只要导出为jpg和webp格式的时候此参数才有效果，默认值是0.92*/
-            var newUrl = canvas.toDataURL('image/jpeg', 0.9); //base64 格式
+            var newUrl = canvas.toDataURL('image/jpeg', 0.1); //base64 格式
             //console.log(canvas.toDataURL('image/jpeg', 0.92));
-            　　　　　　　　　　
+            console.log('压缩后长度：', newUrl.length)　　　　　　　　　　
             imgView.src = newUrl;
         };
 
         // 文件base64化，以便获知图片原始尺寸
         reader.onload = function (e) {
             img.src = e.target.result;
+            console.log('压缩前长度：', e.target.result.length)
         };
         eleFile.addEventListener('change', function (event) {
             file = event.target.files[0];
@@ -118,7 +119,7 @@
                 canvas = convertImageToCanvas(sampleImage);
             url = canvas.toDataURL("image/jpeg"); //jpeg格式
             //以下代码为下载此图片功能
-            var triggerDownload = $("#tttt").attr("href", url).attr("download", "pirture.png");
+            var triggerDownload = $("#tttt").attr("href", url).attr("download", "pirture.jpg");
             triggerDownload[0].click();
             //    triggerDownload.remove();
         }
