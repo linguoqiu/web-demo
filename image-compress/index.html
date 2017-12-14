@@ -18,18 +18,25 @@
 
     #file {
         width: 100%;
-        height: 50%;
+        height: 100%;
         cursor: pointer;
+        opacity: 0;
         z-index: 5;
+    }
+    #imgView{
+        background-repeat: no-repeat;
     }
 </style>
 <script src="./jquery-2.1.1.min.js"></script>
 <body>
-    <input id="file" type="file" name="file">
+    <div id="imgView" style="width:100%;height:200px">
+            <input id="file" type="file" name="file">
+    </div>
+    
     <button onclick="downImg()" style="display: block;">下载</button>
     <a id="tttt"></a>
     <div id="preview">
-        <img id="imgView" src="" alt="正在加载中">
+        <img  src="" alt="正在加载中">
     </div>
     <script type="text/javascript">
         var eleFile = document.querySelector('#file');
@@ -82,7 +89,7 @@
             var newUrl = canvas.toDataURL('image/jpeg', 0.1); //base64 格式
             //console.log(canvas.toDataURL('image/jpeg', 0.92));
             console.log('压缩后长度：', newUrl.length)　　　　　　　　　　
-            imgView.src = newUrl;
+            imgView.style.backgroundImage = "url('"+newUrl+"')";
         };
 
         // 文件base64化，以便获知图片原始尺寸
